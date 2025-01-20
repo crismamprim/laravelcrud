@@ -74,7 +74,7 @@
                         <td>{{ $treinamentos->descricao }}</td>
                         <td>{{ \Carbon\Carbon::parse($treinamentos->data)->format('d M Y') }}</td>
                         <td>{{ \Carbon\Carbon::parse($treinamentos->validade)->format('d M Y') }}</td>
-                        <td>{{ $treinamentos->situacao->nome }}</td>
+                        
                         <td ><a class="btn btn-primary" href="{{ route('visualizar', ['treinamento' => $treinamentos]) }}">Visualizar</a></td>
                         <td ><a class="btn btn-warning" href="{{ route('editar', ['treinamento' => $treinamentos]) }}">Alterar</a></td>
                         
