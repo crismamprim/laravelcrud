@@ -16,6 +16,7 @@ class Treinamento extends Model
         'funcionario',
         'norma',
         'descricao',
+        'st_treinamento_id',
         'data',
         'validade'
     ];

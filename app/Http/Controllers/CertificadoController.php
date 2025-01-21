@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CertificadoRequest;
 use App\Models\Certificado;
+use App\Models\Situacao;
 use App\Models\Treinamento;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,11 @@ class CertificadoController extends Controller
 {
     public function treinamento()
     {
-        return view('treinamento');
+        $situacaoTreinamento = Situacao::orderby('nome', 'asc')->get();
+
+        return view('treinamento', [
+            'situacaoTreinamento' => $situacaoTreinamento,
+        ]);
     }
 
     public function listar(Request $request)
@@ -58,6 +63,7 @@ class CertificadoController extends Controller
             'funcionario' => $request->funcionario,
             'norma' => $request->norma,
             'descricao' => $request->descricao,
+            'st_treinamento_id' => $request->st_treinamento_id,
             'data' => $request->data,
             'validade' => $request->validade
         ]);

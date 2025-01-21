@@ -63,6 +63,17 @@
                       <input class="form-control" name="descricao" type="text" placeholder="Descrição" aria-label=".form-control-lg example" value="{{ old('descricao') }}">
                     </div>
                     <div class="mb-3 m-4">
+                      <label for="st_treinamento_id" class="form-label fw-semibold">Situação</label>
+                      <select name="st_treinamento_id" id="st_treinamento_id" class="form-select">
+                        <option value="">Selecione</option>
+                          @forelse ($situacaoTreinamento as $situacao )
+                          <option value="{{ $situacao->id }}">{{ $situacao->nome }}</option>
+                          @empty
+                          <option value="">Nenhuma situção encontrada</option>
+                          @endforelse
+                      </select>
+                    </div>
+                    <div class="mb-3 m-4">
                       <label for="formGroupExampleInput" class="form-label fw-semibold">Data</label>
                       <input class="form-control" name="data" type="date" aria-label=".form-control-lg example" value="{{ old('data') }}">
                     </div>
