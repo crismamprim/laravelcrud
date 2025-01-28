@@ -21,7 +21,7 @@ class Treinamento extends Model
         'validade'
     ];
 
-    public function situacao()
+    public function situacao_treinamento()
     {
         return $this->belongsTo(Situacao::class);
     }

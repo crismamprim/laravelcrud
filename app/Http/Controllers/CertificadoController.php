@@ -7,6 +7,7 @@ use App\Http\Requests\CertificadoRequest;
 use App\Models\Certificado;
 use App\Models\Situacao;
 use App\Models\Treinamento;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CertificadoController extends Controller
@@ -31,12 +32,12 @@ class CertificadoController extends Controller
         ->when($request->filled('dataFim'), function ($whenQuery) use ($request){
             $whenQuery->where('data', '<=', \Carbon\Carbon::parse($request->dataFim)->format('Y-m-d'));
         })
-        ->with('situacao')
-        ->orderByDesc('norma')
+        ->with('situacao_treinamento')
+        ->orderBy('validade')
         ->paginate(15)
         ->withQueryString();
 
-      //  dd($treinamento);
+       // dd($treinamento);
 
         return view('listar', [
             'treinamento' => $treinamento, 
@@ -47,7 +48,12 @@ class CertificadoController extends Controller
 
     public function visualizar(Treinamento $treinamento)
     {
-        return view('visualizar', ['treinamento' => $treinamento ]);
+        $dataInicial = Carbon::parse($treinamento->data);
+        $dataFinal = Carbon::parse($treinamento->validade);
+
+        $diferenca = $dataInicial->diff($dataFinal);
+
+        return view('visualizar', ['treinamento' => $treinamento, 'diferenca' => $diferenca]);
     }
 
     public function cadastrar(CertificadoRequest $request)
@@ -99,4 +105,5 @@ class CertificadoController extends Controller
 
         return redirect()->route('visulizar')->with('success','Treinamento deletado com sucesso!!!');
     }
+    
 }

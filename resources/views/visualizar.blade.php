@@ -30,6 +30,8 @@
                 <h5 class="card-title text-primary">{{ $treinamento->funcionario }}</h5>
                 <p class="card-text"><strong>Data do treinamento: </strong>{{ \Carbon\Carbon::parse($treinamento->data)->format('d M Y') }}</p>
                 <span class="badge rounded-pill text-bg-info">Validade: {{ \Carbon\Carbon::parse($treinamento->validade)->format('d M Y') }}</span>
+                <br>
+                <span class="badge rounded-pill text-bg-info">Vence em: {{ $diferenca }}</span>
                 
                 <br>
                 <br>
